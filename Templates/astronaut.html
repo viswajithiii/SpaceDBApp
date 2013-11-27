@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block body %}
+<div id="div_ast">
+  <div class="span3 offset5"><h3>Astronauts</h3></div>
+  <p> 
+    <table class="table table-bordered span6 offset3" id="table_ast">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Country</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ast in astronauts %}
+          <tr>
+            <td><a href = "/astronaut/{{ast.id}}">{{ast.firstName}} {{ast.middleName}} {{ast.lastName}}</a></td>
+            <td>{{ast.country}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+</div>
+{% endblock %}

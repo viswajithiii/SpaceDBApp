@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div id="div_name" class="span6 offset5">
+    <h2> {{ astro }} </h2>
+</div>
+{% if education %} 
+{% for e in education %}
+    <div id="div_education" class="span6 offset4">
+        <h5> Educated at: {{ e.university }}, graduated in {{ e.year }} </h5>
+    </div>
+{% endfor %}
+{% endif %}
+{% if leader %}
+<div id="div_leader" class = "span10 offset1">
+<h5> Leader of the following SpaceFlights</h5>
+<ol>
+{% for l in leader %}
+   <li> {{ l.launchVehicle }} launched by {{ l.country }} in {{ l.year }} </li>
+{% endfor %}
+</ol>
+</div>
+{% endif %}
+{% if member_set %}
+<div id="div_mem">
+  <div class="span3 offset5"><h3>Member of the following SpaceFlights</h3></div>
+  <p> 
+    <table class="table table-bordered span6 offset3" id="table_gal">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Country</th>
+          <th>Launch Year</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in member_set %}
+          <tr>
+            <td>{{m.launchVehicle}}</td>
+            <td> {{ m.country }} </td>
+            <td> {{ m.year }} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+</div>
+{% endif %}
+{% endblock %}

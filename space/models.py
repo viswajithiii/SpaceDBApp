@@ -5,18 +5,25 @@ from django.db import models
 class Astronaut(models.Model):
 
     firstName = models.CharField(max_length=15)
-    middleName = models.CharField(max_length=15,null=True)
+    middleName = models.CharField(max_length=15,null=True,blank=True)
     lastName = models.CharField(max_length=15)
     country = models.CharField(max_length=30)
     dob = models.DateField()
+
+    def __unicode__(self):
+        return u'%s %s' % (self.firstName, self.lastName)
 
 class Astronomer(models.Model):
 
     firstName = models.CharField(max_length=15)
-    middleName = models.CharField(max_length=15,null=True)
+    middleName = models.CharField(max_length=15,null=True,blank=True)
     lastName = models.CharField(max_length=15)
     country = models.CharField(max_length=30)
     dob = models.DateField()
+
+    def __unicode__(self):
+        return u'%s %s' % (self.firstName, self.lastName)
+
 
 class Comet(models.Model):
 
@@ -24,6 +31,10 @@ class Comet(models.Model):
     approachPeriod = models.FloatField()
     orbitalVelocity = models.FloatField()
     astronomer = models.ForeignKey('Astronomer')
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
 
 class EducationAstronaut(models.Model):
 
@@ -45,6 +56,10 @@ class Galaxy(models.Model):
     distfromMilkyWay = models.FloatField()
     discoverer = models.ForeignKey('Astronomer')
 
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
+
 class Moon(models.Model):
 
     name = models.CharField(max_length=30)
@@ -58,6 +73,10 @@ class Moon(models.Model):
     planet = models.ForeignKey('Planet')
     revolutionPeriod = models.FloatField()
     discoverer = models.ForeignKey('Astronomer')
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
 
 class Planet(models.Model):
 
@@ -74,6 +93,10 @@ class Planet(models.Model):
     planetSystem = models.CharField(max_length=30)
     discoverer = models.ForeignKey('Astronomer')
 
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
+
 class Star(models.Model):
 
     name = models.CharField(max_length=30)
@@ -84,17 +107,21 @@ class Star(models.Model):
     temperature = models.FloatField()
     galaxy = models.ForeignKey('Galaxy')
     discoverer = models.ForeignKey('Astronomer')
-    secondaryStar = models.ForeignKey('self')
+    secondaryStar = models.ForeignKey('self',null=True,blank=True)
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
 
 class SpaceFlight(models.Model):
 
     country = models.CharField(max_length=30)
     year = models.IntegerField()
     launchVehicle = models.CharField(max_length=30)
-    satellite = models.ForeignKey('Satellite',null=True)
-    moon = models.ForeignKey('Moon',null=True)
+    satellite = models.ForeignKey('Satellite',null=True,blank=True)
+    moon = models.ForeignKey('Moon',null=True,blank=True)
     leader = models.ForeignKey('Astronaut',related_name='Leader')
-    nextFlight = models.ForeignKey('self')
+    nextFlight = models.ForeignKey('self',null=True,blank=True)
     members = models.ManyToManyField('Astronaut')
 
 class Satellite(models.Model):
@@ -105,8 +132,12 @@ class Satellite(models.Model):
     revolutionPeriod = models.FloatField()
     satellitetype = models.CharField(max_length=30)
     launchVehicle = models.CharField(max_length=30)
-    planet = models.ForeignKey('Planet',null=True)
-    moon = models.ForeignKey('Moon',null=True)
+    planet = models.ForeignKey('Planet',null=True,blank=True)
+    moon = models.ForeignKey('Moon',null=True,blank=True)
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
+
 
 class GasesInAtmosphere(models.Model):
 

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div id="div_name" class="span6 offset5">
+    <h2> {{ astro }} </h2>
+</div>
+{% if education %} 
+{% for e in education %}
+    <div id="div_education" class="span6 offset4">
+        <h5> Educated at: {{ e.university }}, graduated in {{ e.year }} </h5>
+    </div>
+{% endfor %}
+{% endif %}
+{% if moon %}
+<div id="div_moon">
+  <div class="span3 offset5"><h3>Moons discovered</h3></div>
+  <p> 
+    <table class="table table-bordered span6 offset3" id="table_moon">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Planet</th>
+          <th>Has Water?</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for m in moon %}
+          <tr>
+            <td>{{m.name}}</td>
+            <td>{{m.planet}}</td>
+            <td>{% if m.waterPresent %} Yes {% else %} No {% endif %} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+</div>
+{% endif %}
+
+{% if planet %}
+<div id="div_planet">
+  <div class="span3 offset5"><h3>Planets discovered</h3></div>
+  <p> 
+    <table class="table table-bordered span6 offset3" id="table_planet">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Star</th>
+          <th>Has Water?</th>
+          <th>Rotation Period </th>
+          <th> Temperature </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in planet %}
+          <tr>
+            <td>{{p.name}}</td>
+            <td>{{p.star}}</td>
+            <td>{% if p.waterPresent %} Yes {% else %} No {% endif %} </td>
+            <td> {{p.rotationPeriod}} </td>
+            <td> {{p.temperature}} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+</div>
+{% endif %}
+{% if star %} 
+<div id="div_star">
+  <div class="span3 offset5"><h3>Stars discovered</h3></div>
+  <p> 
+    <table class="table table-bordered span6 offset3" id="table_star">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Galaxy</th>
+          <th>Colour</th>
+          <th> Mass</th>
+          <th> Radius</th>
+          <th> Temperature</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for s in star %}
+          <tr>
+            <td>{{s.name}}</td>
+            <td>{{s.galaxy}}</td>
+            <td>{{s.colour}} </td>
+            <td> {{s.mass}} </td>
+            <td> {{s.radius}} </td>
+            <td> {{s.temperature}} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+</div>
+{% endif %}
+{% if galaxy %}
+<div id="div_gal">
+  <div class="span3 offset5"><h3>Galaxies discovered</h3></div>
+  <p> 
+    <table class="table table-bordered span6 offset3" id="table_gal">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th> Type </th>
+          <th> Size </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for g in galaxy %}
+          <tr>
+            <td>{{g.name}}</td>
+            <td> {{ g.galaxytype }} </td>
+            <td> {{ g.size }} </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </p>
+</div>
+{% endif %}
+{% endblock %}
